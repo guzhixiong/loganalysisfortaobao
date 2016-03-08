@@ -1,0 +1,105 @@
+ 
+安装nginx版本为0.8.36
+
+一。下载nginx
+
+下载地址：http://www.nginx.org/
+
+选择nginx-0.8.36
+
+将该下载包拷贝到/usr/local/下（随意了，找个地方就好）
+
+ 
+
+二。安装
+
+cd /usr/local/
+
+tar zxvf nginx-0.8.36.tar.gz
+
+cd nginx-0.8.36
+
+ 
+
+按照一些网络资料的介绍，执行如下命令即可完成安装
+
+./configure
+
+make
+
+make install
+
+ 
+
+但在实际安装过程中会，执行./configure时，根据系统的配置不同会有不同的错误提示，这里不罗嗦了，安装nginx需要安装openssl和 pcre，
+
+openssl在linux下svn的安装中有过介绍，这里不再赘述，下面只介绍一下pcre的安装，如下：
+
+下载pcre:http://sourceforge.net/projects/pcre/files/ ，选择pcre-8.02.tar.gz,拷贝到/usr/local/下
+
+tar -zxvf pcre-8.02.tar.gz
+
+cd pcre-8.02
+
+./configure --prefix=/usr/local/pcre
+
+make
+
+make install
+
+ 
+
+ok,pcre安装完成
+
+ 
+
+接着我们安装nginx，
+
+cd /usr/local/nginx-0.8.36
+
+ 
+
+./configure --prefix=/usr/local/nginx --with-pcre=/usr/local/pcre-8.02 --with-http_ssl_module --with-openssl=/usr/local/openssl-0.9.8o
+
+ 
+
+make
+
+ 
+
+make install
+
+ 
+
+ok，nginx安装完成。
+
+常见问题与错误处理
+1、400 bad request错误的原因和解决办法
+配置nginx.conf相关设置如下.
+client_header_buffer_size 16k;
+large_client_header_buffers 4 64k;
+根据具体情况调整，一般适当调整值就可以。
+
+2、Nginx 502 Bad Gateway错误
+proxy_next_upstream error timeout invalid_header http_500 http_503;
+或者尝试设置:
+large_client_header_buffers 4 32k;
+
+
+3、Nginx出现的413 Request Entity Too Large错误
+这个错误一般在上传文件的时候会出现，
+编辑Nginx主配置文件Nginx.conf，找到http{}段，添加
+client_max_body_size 10m; //设置多大根据自己的需求作调整.
+如果运行php的话这个大小client_max_body_size要和php.ini中的如下值的最大值一致或者稍大，这样就不会因为提交数据大小不一致出现的错误。
+post_max_size = 10M
+upload_max_filesize = 2M
+
+4、解决504 Gateway Time-out(nginx)
+遇到这个问题是在升级discuz论坛的时候遇到的
+一般看来, 这种情况可能是由于nginx默认的fastcgi进程响应的缓冲区太小造成的, 这将导致fastcgi进程被挂起, 如果你的fastcgi服务对这个挂起处理的不好, 那么最后就极有可能导致504 Gateway Time-out
+现在的网站, 尤其某些论坛有大量的回复和很多内容的, 一个页面甚至有几百K。
+默认的fastcgi进程响应的缓冲区是8K, 我们可以设置大点
+在nginx.conf里, 加入： fastcgi_buffers 8 128k
+这表示设置fastcgi缓冲区为8×128k
+当然如果您在进行某一项即时的操作, 可能需要nginx的超时参数调大点，例如设置成60秒：send_timeout 60;
+只是调整了这两个参数, 结果就是没有再显示那个超时, 可以说效果不错, 但是也可能是由于其他的原因, 目前关于nginx的资料不是很多, 很多事情都需要长期的经验累计才有结果, 期待您的发现哈!

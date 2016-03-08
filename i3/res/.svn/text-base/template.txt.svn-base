@@ -1,0 +1,22 @@
+com.wangcheng.dc.handler.AbstractRequestHandler
+com.wangcheng.dc.IConstants
+
+http://c10.taobao.fenxi001.com/c?u_name=supershop15
+ &u_template_name=1%E5%85%83%E6%B5%8B%E8%AF%95%E7%AC%AC%E4%B8%80%E4%B8%AA
+ &u_template_id=111082
+ &u_preurl=http://store.daily.taobao.net/shop/view_shop.htm
+ &u_title=%E9%A6%96%E9%A1%B5-%E5%BC%80%E4%B8%AA%E5%AE%98%E6%96%B9%E6%8B%93%E5%B1%95%E7%89%88-%20%E6%B7%98%E5%AE%9D%E7%BD%91
+
+
+http://img.tongji.linezing.com/?id=\t\caseee\n9999-=!()!@3082342
+http://img.tongji.linezing.com/999082342/tongji.gif
+http://img.tongji.linezing.com/47328/tongji.gif
+
+http://c10.taobao.fenxi001.com/c
+ ?u_name=dxh9791dht
+ &u_preurl=
+ &u_title=%E9%A6%96%E9%A1%B5-%E5%A4%A9%E5%A4%96%E5%A4%A9%E7%BE%8E%E9%A3%9F%20%E9%9F%A9%E5%9B%BD%E9%A3%9F%E5%93%81%20%E9%A5%BC%E5%B9%B2%20%E9%9B%B6%E9%A3%9F%20%E5%B7%A7%E5%85%8B%E5%8A%9B%20%E6%9F%9A%E5%AD%90%E8%8C%B6EMS%E8%B6%85%E4%BD%8E%E8%BF%90%E8%B4%B9-%20%E6%B7%98%E5%AE%9D%E7%BD%91
+
+
+SELECT u.nick, A.* FROM A_TEMPLATE_DAY A, SYS_USER u
+where A.userid = u.userid and A.date between '20110117' and '20110118' order by userid, date;

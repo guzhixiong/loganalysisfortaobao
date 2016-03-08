@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao
+END
+TemplateDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/TemplateDao.java
+END
+UserCategoryDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/UserCategoryDao.java
+END
+IndexProvinceDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/IndexProvinceDao.java
+END
+CategoryDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/CategoryDao.java
+END
+ShopProvinceDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/ShopProvinceDao.java
+END
+PathFromDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/PathFromDao.java
+END
+ItemFromDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/ItemFromDao.java
+END
+KeywordDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/KeywordDao.java
+END
+PathRelationDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/PathRelationDao.java
+END
+IndexFromDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/IndexFromDao.java
+END
+PathDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/PathDao.java
+END
+ShopFromDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/ShopFromDao.java
+END
+ItemDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/ItemDao.java
+END
+ItemKeywordDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/ItemKeywordDao.java
+END
+IndexDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/IndexDao.java
+END
+ShopHourDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/ShopHourDao.java
+END
+ShopDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/ShopDao.java
+END
+TaobaoKeywordDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/dao/TaobaoKeywordDao.java
+END

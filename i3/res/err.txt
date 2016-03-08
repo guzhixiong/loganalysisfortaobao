@@ -1,0 +1,49 @@
+start
+0 [main] INFO i3.market.MarketFluxCollector - Hi
+992 [main] INFO i3.market.MarketFluxCollector - nick_ip_from: /data/share/nick_ip/20110221_nick_ip_from/part-r-00000, /data/share/nick_ip/20110221_nick_ip_from/part-r-00001, /data/share/nick_ip/20110221_nick_ip_from/part-r-00002
+305712 [main] INFO i3.market.MarketFluxCollector - nick_ip_keyword: /data/share/nick_ip/20110221_nick_ip_keyword/part-r-00000, /data/share/nick_ip/20110221_nick_ip_keyword/part-r-00001, /data/share/nick_ip/20110221_nick_ip_keyword/part-r-00002
+446122 [main] INFO i3.market.MarketFluxCollector - to file
+1341915 [main] ERROR i3.market.MarketFluxCollector -
+com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry 'MarketFluxFSIndex-2011-02-21 00:00:00' for key 'PRIMARY'
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+        at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+        at java.lang.reflect.Constructor.newInstance(Constructor.java:513)
+        at com.mysql.jdbc.Util.handleNewInstance(Util.java:409)
+        at com.mysql.jdbc.Util.getInstance(Util.java:384)
+        at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1041)
+        at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3566)
+        at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3498)
+        at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1959)
+        at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2113)
+        at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2562)
+        at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2512)
+        at com.mysql.jdbc.StatementImpl.execute(StatementImpl.java:781)
+        at com.mysql.jdbc.StatementImpl.execute(StatementImpl.java:624)
+        at i3.market.MarketFluxCollector.persistent(MarketFluxCollector.java:438)
+        at i3.market.MarketFluxCollector.<init>(MarketFluxCollector.java:119)
+        at i3.market.MarketFluxCollector.main(MarketFluxCollector.java:547)
+Exception in thread "main" java.lang.RuntimeException: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry 'MarketFluxFSIndex-2011-02-21 00:00:00' for key 'PRIMARY'
+        at i3.market.MarketFluxCollector.<init>(MarketFluxCollector.java:143)
+        at i3.market.MarketFluxCollector.main(MarketFluxCollector.java:547)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry 'MarketFluxFSIndex-2011-02-21 00:00:00' for key 'PRIMARY'
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+        at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+        at java.lang.reflect.Constructor.newInstance(Constructor.java:513)
+        at com.mysql.jdbc.Util.handleNewInstance(Util.java:409)
+        at com.mysql.jdbc.Util.getInstance(Util.java:384)
+        at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1041)
+        at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3566)
+        at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3498)
+        at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1959)
+        at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2113)
+        at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2562)
+        at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2512)
+        at com.mysql.jdbc.StatementImpl.execute(StatementImpl.java:781)
+        at com.mysql.jdbc.StatementImpl.execute(StatementImpl.java:624)
+        at i3.market.MarketFluxCollector.persistent(MarketFluxCollector.java:438)
+        at i3.market.MarketFluxCollector.<init>(MarketFluxCollector.java:119)
+        ... 1 more
+./job_marketflux.sh: line 66: unexpected EOF while looking for matching `''
+./job_marketflux.sh: line 67: syntax error: unexpected end of file

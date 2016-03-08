@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/repos/!svn/ver/14/i3/src/main/resources
+END
+da.properties
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/repos/!svn/ver/14/i3/src/main/resources/da.properties
+END
+quartz.properties
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/repos/!svn/ver/14/i3/src/main/resources/quartz.properties
+END
+uc.properties
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/repos/!svn/ver/14/i3/src/main/resources/uc.properties
+END
+config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/repos/!svn/ver/14/i3/src/main/resources/config.xml
+END
+hdfs-site.xml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/repos/!svn/ver/14/i3/src/main/resources/hdfs-site.xml
+END
+core-site.xml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/repos/!svn/ver/14/i3/src/main/resources/core-site.xml
+END
+mapred-site.xml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/repos/!svn/ver/14/i3/src/main/resources/mapred-site.xml
+END
+log4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/repos/!svn/ver/14/i3/src/main/resources/log4j.properties
+END
+market_flux.properties
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/!svn/ver/14/i3/src/main/resources/market_flux.properties
+END
+configuration.xsl
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/repos/!svn/ver/14/i3/src/main/resources/configuration.xsl
+END

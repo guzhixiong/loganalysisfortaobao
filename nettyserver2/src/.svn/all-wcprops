@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/repos/!svn/ver/8/nettyserver2/src
+END
+log4j-diskmonitor.properties
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/!svn/ver/8/nettyserver2/src/log4j-diskmonitor.properties
+END
+log4j-netty.properties
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/repos/!svn/ver/8/nettyserver2/src/log4j-netty.properties
+END
+category.xml
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/repos/!svn/ver/8/nettyserver2/src/category.xml
+END
+realtime.properties
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/repos/!svn/ver/8/nettyserver2/src/realtime.properties
+END
+netty.properties
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/repos/!svn/ver/8/nettyserver2/src/netty.properties
+END
+log4j-rta.properties
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/repos/!svn/ver/8/nettyserver2/src/log4j-rta.properties
+END

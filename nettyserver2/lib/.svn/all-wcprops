@@ -1,0 +1,185 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/repos/!svn/ver/8/nettyserver2/lib
+END
+mysql-connector-java-5.1.13-bin.jar
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/repos/!svn/ver/8/nettyserver2/lib/mysql-connector-java-5.1.13-bin.jar
+END
+commons-el-1.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/repos/!svn/ver/8/nettyserver2/lib/commons-el-1.0.jar
+END
+xmlenc-0.52.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/repos/!svn/ver/8/nettyserver2/lib/xmlenc-0.52.jar
+END
+wsdl4j-1.6.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/repos/!svn/ver/8/nettyserver2/lib/wsdl4j-1.6.1.jar
+END
+netty-3.2.1.Final-sources.jar
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/repos/!svn/ver/8/nettyserver2/lib/netty-3.2.1.Final-sources.jar
+END
+shiftone-jrat.jar
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/repos/!svn/ver/8/nettyserver2/lib/shiftone-jrat.jar
+END
+hadoop-0.20.2-core.jar
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/repos/!svn/ver/8/nettyserver2/lib/hadoop-0.20.2-core.jar
+END
+dom4j-1.6.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/repos/!svn/ver/8/nettyserver2/lib/dom4j-1.6.1.jar
+END
+commons-cli-1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/repos/!svn/ver/8/nettyserver2/lib/commons-cli-1.2.jar
+END
+XmlSchema-1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/repos/!svn/ver/8/nettyserver2/lib/XmlSchema-1.1.jar
+END
+xfire-jsr181-api-1.0-M1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/repos/!svn/ver/8/nettyserver2/lib/xfire-jsr181-api-1.0-M1.jar
+END
+commons-httpclient-3.0.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/!svn/ver/8/nettyserver2/lib/commons-httpclient-3.0.1.jar
+END
+ezmorph-1.0.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/repos/!svn/ver/8/nettyserver2/lib/ezmorph-1.0.6.jar
+END
+commons-httpclient-3.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/repos/!svn/ver/8/nettyserver2/lib/commons-httpclient-3.0.jar
+END
+commons-codec-1.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/repos/!svn/ver/8/nettyserver2/lib/commons-codec-1.3.jar
+END
+xfire-all-1.2.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/repos/!svn/ver/8/nettyserver2/lib/xfire-all-1.2.6.jar
+END
+jdom-1.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/repos/!svn/ver/8/nettyserver2/lib/jdom-1.0.jar
+END
+core-3.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/repos/!svn/ver/8/nettyserver2/lib/core-3.1.1.jar
+END
+commons-collections-3.2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/repos/!svn/ver/8/nettyserver2/lib/commons-collections-3.2.1.jar
+END
+commons-lang-2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/repos/!svn/ver/8/nettyserver2/lib/commons-lang-2.1.jar
+END
+json-lib-2.3-jdk15.jar
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/repos/!svn/ver/8/nettyserver2/lib/json-lib-2.3-jdk15.jar
+END
+netty-3.2.1.Final.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/repos/!svn/ver/8/nettyserver2/lib/netty-3.2.1.Final.jar
+END
+commons-logging-1.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/repos/!svn/ver/8/nettyserver2/lib/commons-logging-1.1.1.jar
+END
+uc-new-2.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/repos/!svn/ver/8/nettyserver2/lib/uc-new-2.0.jar
+END
+commons-logging-1.0.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/repos/!svn/ver/8/nettyserver2/lib/commons-logging-1.0.4.jar
+END
+commons-net-1.4.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/repos/!svn/ver/8/nettyserver2/lib/commons-net-1.4.1.jar
+END
+activation-1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/repos/!svn/ver/8/nettyserver2/lib/activation-1.1.jar
+END
+commons-beanutils-1.8.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/repos/!svn/ver/8/nettyserver2/lib/commons-beanutils-1.8.0.jar
+END
+commons-logging-api-1.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/repos/!svn/ver/8/nettyserver2/lib/commons-logging-api-1.1.1.jar
+END
+log4j-1.2.16.jar
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/repos/!svn/ver/8/nettyserver2/lib/log4j-1.2.16.jar
+END

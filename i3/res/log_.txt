@@ -1,0 +1,54 @@
+date time s-sitename s-computername s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) cs-host sc-status sc-substatus sc-win32-status 
+---
+2010-05-09 
+15:58:40 
+W3SVC253158914 
+NBDC 
+58.221.37.94 
+GET 
+/dc.pic 
+i=129653662 
+80 
+- 
+121.205.117.174 
+Mozilla/4.0+(compatible;+MSIE+7.0;+Windows+NT+5.1;+TencentTraveler+4.0;+QQPinyin+730;+Mozilla/4.0+(compatible;+MSIE+6.0;+Windows+NT+5.1;+SV1)+) 
+http://item.taobao.com/auction/item_detail-0db2-dd84c9136200e0d8e9e09027b33d17c6.jhtml 
+c10.fenxi001.com 
+200 
+0 
+0
+
+
+date time cs-uri-query c-ip cs(User-Agent) cs(Referer)
+---
+2010-07-13 
+15:59:59 
+i=291436006 
+222.170.145.206 
+Mozilla/4.0+(compatible;+MSIE+7.0;+Windows+NT+5.1;+EmbeddedWB+14.52+from:+http://www.bsalsa.com/+EmbeddedWB+14.52;+(R1+1.6)) 
+http://item.taobao.com/item.htm?id=5705724956
+
+
+===Netty log
+date time cs-uri-query c-ip cs(User-Agent) request-id cs(Referer) itemid title
+===Log4i
+shop ip area agent os prev searchType keyword refer pageType pageId pageFrom item title hour minute second
+
+
+* TRADE_NO_CREATE_PAY (没有创建支付宝交易) 
+* WAIT_BUYER_PAY (等待买家付款) 
+* WAIT_SELLER_SEND_GOODS (等待卖家发货,即:买家已付款) 
+* WAIT_BUYER_CONFIRM_GOODS (等待买家确认收货,即:卖家已发货) 
+* TRADE_BUYER_SIGNED (买家已签收,货到付款专用) 
+* TRADE_FINISHED (交易成功) 
+* TRADE_CLOSED (交易关闭) 
+* TRADE_CLOSED_BY_TAOBAO (交易被淘宝关闭) 
+* ALL_WAIT_PAY (包含：WAIT_BUYER_PAY、TRADE_NO_CREATE_PAY) 
+* ALL_CLOSED (包含：TRADE_CLOSED、TRADE_CLOSED_BY_TAOBAO)
+
+
+546
+asdalchen
+http://item.taobao.com/item.htm?id=6690889135
+http://item.taobao.com/auction/item_detail.htm?item_num_id=6690889135
+

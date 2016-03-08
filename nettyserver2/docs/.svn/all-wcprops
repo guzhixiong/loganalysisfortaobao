@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/repos/!svn/ver/8/nettyserver2/docs
+END
+linux
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/repos/!svn/ver/8/nettyserver2/docs/linux
+END
+nginx
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/repos/!svn/ver/8/nettyserver2/docs/nginx
+END
+db.sql
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/repos/!svn/ver/8/nettyserver2/docs/db.sql
+END
+dc.pic.gif
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/repos/!svn/ver/8/nettyserver2/docs/dc.pic.gif
+END
+mysql
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/repos/!svn/ver/8/nettyserver2/docs/mysql
+END
+nginx.conf
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/repos/!svn/ver/8/nettyserver2/docs/nginx.conf
+END
+deploy.txt
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/repos/!svn/ver/8/nettyserver2/docs/deploy.txt
+END
+jvm.txt
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/repos/!svn/ver/8/nettyserver2/docs/jvm.txt
+END
+test.txt
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/repos/!svn/ver/8/nettyserver2/docs/test.txt
+END

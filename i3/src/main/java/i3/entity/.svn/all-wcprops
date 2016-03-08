@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity
+END
+ItemKeyword.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/ItemKeyword.java
+END
+ShopHour.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/ShopHour.java
+END
+Index.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/Index.java
+END
+Shop.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/Shop.java
+END
+TaobaoKeyword.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/TaobaoKeyword.java
+END
+Template.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/Template.java
+END
+UserCategory.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/UserCategory.java
+END
+IndexProvince.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/IndexProvince.java
+END
+Category.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/Category.java
+END
+ShopProvince.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/ShopProvince.java
+END
+ItemFrom.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/ItemFrom.java
+END
+Keyword.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/Keyword.java
+END
+PathRelation.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/PathRelation.java
+END
+IndexFrom.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/IndexFrom.java
+END
+Path.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/Path.java
+END
+ShopFrom.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/ShopFrom.java
+END
+Item.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/repos/!svn/ver/14/i3/src/main/java/i3/entity/Item.java
+END

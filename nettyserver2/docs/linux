@@ -1,0 +1,371 @@
+﻿
+linux net:
+
+
+这里的Linux是指RHEL，其他的Linux没有用过，不了解。
+
+ 
+
+/etc/sysctl.conf 是用来控制linux网络的配置文件，对于依赖网络的程序（如web服务器和cache服务器）非常重要，RHEL默认提供的最好调整。
+
+ 
+
+推荐配置（把原/etc/sysctl.conf内容清掉，把下面内容复制进去）：
+
+ 
+
+ 
+
+net.ipv4.ip_local_port_range = 1024 65536
+net.core.rmem_max=16777216
+net.core.wmem_max=16777216
+net.ipv4.tcp_rmem=4096 87380 16777216
+net.ipv4.tcp_wmem=4096 65536 16777216
+net.ipv4.tcp_fin_timeout = 10
+net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_timestamps = 0
+net.ipv4.tcp_window_scaling = 0
+net.ipv4.tcp_sack = 0
+net.core.netdev_max_backlog = 30000
+net.ipv4.tcp_no_metrics_save=1
+net.core.somaxconn = 262144
+net.ipv4.tcp_syncookies = 0
+net.ipv4.tcp_max_orphans = 262144
+net.ipv4.tcp_max_syn_backlog = 262144
+net.ipv4.tcp_synack_retries = 2
+net.ipv4.tcp_syn_retries = 2
+ 
+
+这个配置参考于cache服务器varnish的推荐配置和SunOne服务器系统优化的推荐配置。
+
+varnish调优推荐配置的地址为：http://varnish.projects.linpro.no/wiki/Performance
+
+ 
+
+不过varnish推荐的配置是有问题的，实际运行表明“net.ipv4.tcp_fin_timeout = 3” 的配置会导致页面经常打不开；并且当网友使用的是IE6浏览器时，访问网站一段时间后，所有网页都会打不开，重启浏览器后正常。可能是国外的网速快吧，我们国情决定需要调整“net.ipv4.tcp_fin_timeout = 10”，在10s的情况下，一切正常（实际运行结论）。
+
+ 
+
+ 
+
+修改完毕后，执行：
+
+ 
+
+/sbin/sysctl -p /etc/sysctl.conf
+
+ 
+
+/sbin/sysctl -w net.ipv4.route.flush=1
+
+ 
+
+命令生效。为了保险起见，也可以reboot系统。
+
+ 
+
+调整文件数：
+
+ 
+
+linux系统优化完网络必须调高系统允许打开的文件数才能支持大的并发，默认1024是远远不够的。
+
+ 
+
+执行命令：
+
+ 
+
+Shell代码
+
+   1. echo ulimit -HSn 65536 >> /etc/rc.local  
+   2. echo ulimit -HSn 65536 >>/root/.bash_profile  
+   3. ulimit -HSn 65536  
+   
+   
+硬盘io测试
+	
+
+	time dd if=/dev/zero of=/root/1Gb.file bs=1024 count=1000000
+	time dd if=/root/1Gb.file bs=64k of=/dev/null
+	
+	dd if=/dev/zero of=/root/1Gb.file bs=1024 count=1000000
+	dd if=/root/1Gb.file bs=64k of=/dev/null
+	
+查看硬盘型号
+	
+	hdparm -I /dev/sda1
+	
+查看网卡
+	ethtool ethX      //查询ethX网口基本设置
+	ethtool –h //显示ethtool的命令帮助(help)
+	ethtool –i ethX //查询ethX网口的相关信息
+	ethtool –d ethX //查询ethX网口注册性信息
+	ethtool –r ethX //重置ethX网口到自适应模式
+	ethtool –S ethX //查询ethX网口收发包统计
+	ethtool –s ethX [speed 10|100|1000]\ //设置网口速率10/100/1000M
+	[duplex half|full]\ //设置网口半/全双工
+	[autoneg on|off]\ //设置网口是否自协商
+	[port tp|aui|bnc|mii]\ //设置网口类型
+	[phyad N]\
+	[xcvr internal|exteral]\
+	[wol p|u|m|b|a|g|s|d...]\
+	[sopass xx:yy:zz:aa:bb:cc]\
+	[msglvl N]
+	
+查看网卡型号
+	kudzu --probe --class=network
+	
+	
+CentOS5 服务器优化
+关键字: centos5 服务器优化
+系统环境部署及调整
+1. 检查系统是否正常
+# more /var/log/messages （检查有无系统内核级错误信息）
+# dmesg （检查硬件设备是否有错误信息）
+# ifconfig（检查网卡设置是否正确）
+# pingwww.163.com （检查网络是否正常）
+
+2. 关闭不需要的服务
+# ntsysv
+以下仅列出需要启动的服务，未列出的服务一律关闭：
+crond
+lighttpd //之前添加的web服务
+irqbalance （仅当服务器CPU为S.M.P架构或支持双核心、HT技术时，才需开启，否则关闭。）
+mysql //之前添加的mysql服务
+microcode_ctl
+network
+random
+sendmail
+sshd
+syslog
+
+3. 对TCP/IP网络参数进行调整，加强抗SYN Flood能力
+# echo ‘net.ipv4.tcp_syncookies = 1′ >> /etc/sysctl.conf
+# sysctl -p
+
+4. 配置yum
+# rpm –import /usr/share/doc/centos-release-5/RPM-GPG-KEY-CentOS-5 //导入RPM包的Key
+# yum list | tee /etc/yum.list
+
+5. 修改命令history记录
+# vi /etc/profile
+找到 HISTSIZE=1000 改为 HISTSIZE=50
+
+6. 定时校正服务器时间
+# yum install ntp
+# crontab -e
+加入一行：
+*/15 * * * * ntpdate 210.72.145.44
+## 210.72.145.44 为中国国家授时中心服务器地址。
+
+7. 重新启动系统
+# init 6
+
+8. 使用 yum 程序安装所需开发包（以下为标准的 RPM 包名称）
+gcc gcc-c++ gcc-g77 flex bison autoconf automake bzip2-devel zlib-devel ncurses-devel libjpeg-devel libpng-devel libtiff-devel freetype-devel pam-devel
+
+[8] 定义yum的非官方库
+
+　　在服务器构建的过程中，我们将要用到的一些工具不存在于CentOS中yum的官方库中，所以需要定义yum的非官方库文件，让一些必需的工具通过yum也能够安装。
+
+[root@sample ~]#vi /etc/yum.repos.d/dag.repo　← 建立dag.repo，定义非官方库
+
+[dag]
+name=Dag RPM Repository for Red Hat Enterprise Linux
+baseurl=http://apt.sw.be/redhat/el$releasever/en/$basearch/dag
+gpgcheck=1
+enabled=1
+
+[root@sample ~]#rpm –import http://dag.wieers.com/rpm/packages/RPM-GPG-KEY.dag.txt　← 导入非官方库的GPG
+
+[9] 停止打印服务
+
+　　如果不准备提供打印服务，停止默认被设置为自动启动的打印服务。
+
+[root@sample ~]#/etc/rc.d/init.d/cups stop　← 停止打印服务
+Stopping cups: 　　　　　　 　　　　[OK]　 　　← 停止服务成功，出现“OK”
+
+[root@sample ~]#chkconfig cups off　← 禁止打印服务自动启动
+
+[root@sample ~]#chkconfig –list cups　← 确认打印服务自启动设置状态
+cups0:off 1:off 2:off 3:off 4:off 5:off 6:off　← 0-6都为off的状态就OK（当前打印服务自启动被禁止中）
+
+[10] 停止ipv6
+
+　　在CentOS默认的状态下，ipv6是被启用的状态。因为我们不使用ipv6，所以，停止ipv6，以最大限度保证安全和快速。
+
+　　首先再次确认一下ipv6功能是不是被启动的状态。
+
+[root@sample ~]#ifconfig -a　← 列出全部网络接口信息
+
+eth0 Link encap:Ethernet HWaddr 00:0C:29:B6:16:A3
+inet addr:192.168.0.13 Bcast:192.168.0.255 Mask:255.255.255.0
+inet6 addr: fe80::20c:29ff:feb6:16a3/64 Scope:Link
+UP BROADCAST RUNNING MULTICAST MTU:1500 Metric:1
+RX packets:84 errors:0 dropped:0 overruns:0 frame.:0
+TX packets:93 errors:0 dropped:0 overruns:0 carrier:0
+collisions:0 txqueuelen:1000
+RX bytes:10288 (10.0 KiB) TX bytes:9337 (9.1 KiB)
+Interrupt:185 Base address:0×1400
+
+lo Link encap:Local Loopback
+inet addr:127.0.0.1 Mask:255.0.0.0
+inet6 addr: ::1/128 Scope:Host
+UP LOOPBACK RUNNING MTU:16436 Metric:1
+RX packets:12 errors:0 dropped:0 overruns:0 frame.:0
+TX packets:12 errors:0 dropped:0 overruns:0 carrier:0
+collisions:0 txqueuelen:0
+RX bytes:952 (952.0 b) TX bytes:952 (952.0 b)
+sit0 Link encap:IPv6-in-IPv4　← 确认ipv6是被启动的状态
+NOARP MTU:1480 Metric:1
+RX packets:0 errors:0 dropped:0 overruns:0 frame.:0
+TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+collisions:0 txqueuelen:0
+RX bytes:0 (0.0 b) TX bytes:0 (0.0 b)
+
+　　然后修改相应配置文件，停止ipv6。
+
+[root@sample ~]#vi /etc/modprobe.conf　← 修改相应配置文件，添加如下行到文尾：
+
+alias net-pf-10 off
+alias ipv6 off
+
+[root@sample ~]#shutdown -r now　← 重新启动系统，使设置生效
+
+　　最后确认ipv6的功能已经被关闭。
+
+[root@sample ~]#ifconfig -a　← 列出全部网络接口信息
+
+eth0 Link encap:Ethernet HWaddr 00:0C:29:B6:16:A3
+inet addr:192.168.0.13 Bcast:192.168.0.255 Mask:255.255.255.0
+inet6 addr: fe80::20c:29ff:feb6:16a3/64 Scope:Link
+UP BROADCAST RUNNING MULTICAST MTU:1500 Metric:1
+RX packets:84 errors:0 dropped:0 overruns:0 frame.:0
+TX packets:93 errors:0 dropped:0 overruns:0 carrier:0
+collisions:0 txqueuelen:1000
+RX bytes:10288 (10.0 KiB) TX bytes:9337 (9.1 KiB)
+Interrupt:185 Base address:0×1400lo Link encap:Local Loopback
+inet addr:127.0.0.1 Mask:255.0.0.0
+inet6 addr: ::1/128 Scope:Host
+UP LOOPBACK RUNNING MTU:16436 Metric:1
+RX packets:12 errors:0 dropped:0 overruns:0 frame.:0
+TX packets:12 errors:0 dropped:0 overruns:0 carrier:0
+collisions:0 txqueuelen:0
+RX bytes:952 (952.0 b) TX bytes:952 (952.0 b)
+
+（确认ipv6的相关信息没有被列出，说明ipv6功能已被关闭。） 
+
+
+
+
+
+
+
+
+
+查看centos版本
+	lsb_release -a
+	
+①物理cpu个数:
+
+[root@localhost ~]# cat /proc/cpuinfo | grep "physical id" | sort | uniq | wc -l
+
+②每个物理cpu中core的个数(即核数)
+
+cat /proc/cpuinfo | grep "cpu cores" | uniq
+
+  
+
+linux调整系统时间和时区的方法
+
+1) 找到相应的时区文件 /usr/share/zoneinfo/Asia/Shanghai
+
+用这个文件替换当前的/etc/localtime文件。
+
+2) 修改/etc/sysconfig/clock文件，修改为：
+
+ZONE="Asia/Shanghai"
+UTC=false
+ARC=false
+
+3)
+时间设定成2005年8月30日的命令如下：
+#date -s 08/30/2005
+
+将系统时间设定成下午6点40分0秒的命令如下。
+#date -s 18:40:00
+
+4)
+同步BIOS时钟，强制把系统时间写入CMOS，命令如下：
+#clock -w
+
+5)重启。
+
+
+
+
+linux下单网卡设双IP
+具体做法如下:
+
+1.进入目录：
+[root@dfxg root]# cd /etc/sysconfig/network-scripts/
+
+2：ifcfg-eh0:0中的eh0:0是网卡的代号，当然你也可以用eh0:1之类的，随你喜欢怎么弄，但在eh0:X之前必须有ifcfg，也就是下面这种形式的，我们以eh0:0为例。
+
+[root@dfxg root]#cp ifcfg-eth0 ifcfg-eth0:0
+
+3,编辑ifcfg-eth0:0
+[root@Linuxsir root]# vi ifcfg-eth0:0
+
+ifcfg-eth0:0里面有这样的内容，你可以这样设置，然后IP可以自己设置了。象我这样设置也一样。
+
+# Please read /usr/share/doc/initscripts-*/sysconfig.txt
+# for the documentation of these parameters.
+USERCTL='no'
+NETMASK='255.255.255.0' -》子掩码
+BOOTPROTO='static' -》协议
+DEVICE='eth0:0' -》虚拟网卡的代号
+IPADDR='192.168.0.9' -》我自己设定的IP
+TYPE='Ethernet'
+ONBOOT='yes' -》是否开机激活
+NETWORK='192.168.0.0' -》网域
+BROADCAST='192.168.0.255' -》广播
+
+4.保存退出，然后运行如下的命令，来激活虚拟的网卡。
+[root@dfxg root]# ifup eh0:0
+
+
+
+
+
+
+
+
+
+
+centos 自启动脚本
+ vi /etc/rc.d/init.d/apache
+ 
+apache的内容：
+      #!/bin/bash
+      #Start httpd service
+      /server/apache/bin/apachectl start
+ 
+ 
+然后执行
+      chown -R root /etc/rc.d/init.d/apache
+      chmod 700 /etc/rc.d/init.d/apache
+      ln -s /etc/rc.d/init.d/apache /etc/rc.d/rc3.d/S60apache   #S 是start的简写、代表启动、K是kill的简写、代表关闭。60数字        代表启动的顺序。（对于iptv系统而言、许多服务都是建立在数据库启动的前提下才能够正常启动的、可以通过该数字就行调整脚本的       启动顺序））
+
+
+另一种办法：
+
+3. 启动服务配置
+
+/sbin/chkconfig httpd on [设置apache为自启动]
+/sbin/chkconfig –-add mysqld [mysql服务]
+/sbin/chkconfig mysqld on [mysqld服务]
+
+/sbin/service httpd start [自启动 httpd 服务]
+/sbin/service mysqld start [自启动mysqld服务]

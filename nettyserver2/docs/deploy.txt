@@ -1,0 +1,159 @@
+﻿1.install centos5.5
+	分区
+		mount point /	 30g	所有的程序的根目录
+		mount point /boot 1g		存放系统启动时加载的信息
+		mount point /usr about 100g	你所有的其它的文件通常都会存在/usr 目录以及其子目录下面。包括源码，和一些自己安装的程序文件（他们默认都是放在这个目录下的）
+		mount point /var about 50g	存放不同长度的文件、日志以及其它管理用途的文件。大部分这些文件都是linux每天在运行的时候会读取或是写入的。(默认存放mysql数据文件的地方)
+		mount point /tmp about  20g 	临时文件(默认hadoop文件好像存在这里)
+		mount point /home	10g	这里有每一位用户的登录子目录.可大可小
+		mount point /opt 200g   	存储数据和存放附加软件（hadoop,netty)
+		mount swap  32g	交换分区2倍物理内存大小
+		mount point /data		 辅硬盘安装在这个区
+
+	选择自定义安装
+		Administration Tools
+		Base
+		Development Libraries
+		Development Tools
+		Editors
+		System Tools
+		Text-based Internet
+	
+		
+
+2.edit /etc/sysctl.conf
+
+	net.ipv4.ip_forward = 0
+	net.ipv4.conf.default.rp_filter = 1
+	net.ipv4.conf.default.accept_source_route = 0
+	kernel.sysrq = 0
+	kernel.core_uses_pid = 1
+	net.ipv4.tcp_syncookies = 1
+	kernel.msgmnb = 65536
+	kernel.msgmax = 65536
+	kernel.shmmax = 68719476736
+	kernel.shmall = 4294967296
+	net.ipv4.tcp_max_tw_buckets = 6000
+	net.ipv4.tcp_sack = 1
+	net.ipv4.tcp_window_scaling = 1
+	net.ipv4.tcp_rmem = 4096 87380 4194304
+	net.ipv4.tcp_wmem = 4096 16384 4194304
+	net.core.wmem_default = 38388608
+	net.core.rmem_default = 38388608
+	net.core.rmem_max = 68388608
+	net.core.wmem_max = 68388608
+	net.core.netdev_max_backlog = 262144
+	net.core.somaxconn = 262144
+	net.ipv4.tcp_max_orphans = 3276800
+	net.ipv4.tcp_max_syn_backlog = 262144
+	net.ipv4.tcp_timestamps = 0
+	net.ipv4.tcp_synack_retries = 1
+	net.ipv4.tcp_syn_retries = 1
+	net.ipv4.tcp_tw_recycle = 1
+	net.ipv4.tcp_tw_reuse = 1
+	net.ipv4.tcp_mem = 94500000 915000000 927000000
+	net.ipv4.tcp_fin_timeout = 1
+	net.ipv4.tcp_keepalive_time = 30
+	net.ipv4.ip_local_port_range = 1024 65000
+	
+3.change open file  limit
+
+	 echo ulimit -HSn 65536 >> /etc/rc.local  
+	 echo ulimit -HSn 65536 >>/root/.bash_profile  
+	 ulimit -HSn 65536  
+	 
+4.install nginx
+	1)yum install gcc
+	2)yum install pcre*
+	3)yum install openssl*
+	4)compile nginx
+		./configure --prefix=/usr/local/nginx --with-http_stub_status_module
+		make & make install
+	5)edit /usr/local/nginx/conf/nginx.conf
+		copy nginx.conf to /usr/local/nginx/conf/nginx.conf
+		
+		worker_processes  1;#nginx worker进程数
+		worker_rlimit_nofile 102400; #nginx打开文件描述符数
+		
+		events {
+		    use epoll;	#使用epoll 的网络I/O 模型，
+		    worker_connections  102400;#每个worker进程的连接数
+		}
+		
+		limit_zone one $binary_remote_addr 10m;#一个地址指定的会话或者某些特殊情况限制同时连接数
+     	limit_req_zone $binary_remote_addr zone=two:10m rate=30000r/s;#一个指定的会话或者某个特殊情况限制请求数目
+     	
+     	#负载均衡
+     	upstream backend{
+			server 192.168.2.180:8080;
+			server 192.168.2.182:8080;	
+			server 192.168.2.183:8080;	
+		}
+		
+		location / { 
+	      proxy_pass http://backend;#反向代理
+        }
+
+5.install mysql-server-5.1.49
+	1)rpm -ivh mysql-server-5.1.49.rpm
+	2)edit /etc/my.cnf 
+		cp my.cnf  /etc/my.cnf
+
+	3)setenforce 0 关闭selinux
+	
+6.install jdk1.6.20
+	rpm -ivh jdk-1.6.20.rpm
+7.install netty
+	upload netty to /opt/netty 
+	
+	
+8.nginx management
+	1)start nginx
+		/usr/local/nginx/sbin/nginx
+	2)stop nginx
+		/usr/local/nginx/sbin/nginx -s stop
+	3)edit configuration file
+		see 4.5
+9.netty management
+	1)edit bin/netty.properties file
+		vi /opt/netty/bin/netty.properties
+		
+	2)start netty
+		cd /opt/netty
+		./netty	
+		
+	3)start proccess that send log to hadoop
+		./disk-monitor
+		
+	4)edit bin/realtime.properties
+		vi /opt/netty/bin/realtime.properties
+				
+	5)start RTA
+		./realtime 
+		
+		
+10.system monitor
+	1)monitor cpu,mem
+		top
+	2)monitor network
+		a)see bandwidth
+		 	iptraf
+		b)see upd status
+			netstat -su
+	3)monitor disk
+		nmon
+		df -H
+	4)monitor mysql 
+		mysql -uroot
+		show full processlist;
+
+11.make nginx,netty as system serivce
+	1)nginx
+		add 
+		# chkconfig: - 85 15
+		# description: nginx is a World Wide Web server 
+	     in script head lines
+	2)netty
+	3) cp nginx /etc/init.d/nginx
+	   chkconfig --add nginx
+	   ntsysv

@@ -1,0 +1,17 @@
+server.port=8080
+server.id=netty014
+document.root=d:\\html
+document.index=index.html
+request.redirect=/fenxi001.gif
+request.handlers=com.wangcheng.dc.handler.LogHandler,com.wangcheng.dc.handler.realtime.UDPRealTimeHandler
+request.queue.max=100000
+request.queue.checkInterval=30000
+storage.handlers.main=com.wangcheng.dc.storage.LocalDiskHandler
+storage.handlers.slave=com.wangcheng.dc.storage.LocalDiskHandler
+storage.hdfs.dir=hdfs://192.168.2.180:9000/user/root/logs
+storage.local.dir=d:\\cache
+storage.dateformat=yyyyMMddHH
+storage.checkLocalDiskInterval=30000
+storage.maxWriteBufferSize=10240 
+realtime.udp.port=18881
+realtime.udp.address=127.0.0.1

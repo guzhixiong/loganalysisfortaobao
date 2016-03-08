@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<item pattern="(.+)item_detail(.*)" keyword="item_detail">商品页</item>
+    <item pattern="(.+)item.html?id=(\d)+(.*)" keyword="item.htm?id=">商品页</item>
+    <item pattern="(.+)catId(.*)" keyword="catId">分类页</item>
+    <item pattern="(.+)search-cat(.*)" keyword="search-cat">分类页</item>
+    <item pattern="(.+)search-cat(.*)" keyword="queryType=cat">分类页</item>
+    <item pattern="(.+)keyword(.*)" keyword="keyword">搜索页</item>
+    <item pattern="(.+)searchWord(.*)" keyword="searchWord">搜索页</item>
+    <item pattern="(.+)search=y(.*)" keyword="search=y">搜索页</item>
+    <item pattern="(.+)search=y(.*)" keyword="search=y">搜索页</item>
+    <item pattern="(.+)view_page(.*)" keyword="view_page">自定义页</item>
+</config>

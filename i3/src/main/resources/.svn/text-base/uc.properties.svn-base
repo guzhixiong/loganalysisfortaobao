@@ -1,0 +1,29 @@
+uc.url        = http://10.10.1.4:1350/UcService.svc
+#uc.url        = http://192.168.0.19:80/UserCenter/UcService.svc
+#uc.url        = http://192.168.1.170/UserCenter/UcService.svc
+uc.SOAPAction = http://tempuri.org/IUcService/
+uc.User-Agent = Intown Net\, i\, DA
+
+#uc.action = i.uc.GetServerListsAction
+#uc.action = i.uc.GetUserIndexAction
+#uc.action = i.uc.GetUsersAction 
+#uc.action = i.uc.GetUsersByNickAction
+#uc.action = i.uc.GetUsersByIDAction 
+#uc.action = i.uc.AddUsersAction 
+
+i.uc.GetServerListsAction.SOAPAction = GetServerLists
+i.uc.GetServerListsAction.service    = DA
+i.uc.GetUserIndexAction.SOAPAction   = GetUserIndex
+i.uc.GetUsersAction.SOAPAction       = GetUsers
+i.uc.GetUsersByNickAction.SOAPAction = GetUsersByNick
+i.uc.GetUsersByIDAction.SOAPAction   = GetUsersByID
+i.uc.AddUsersAction.SOAPAction       = AddUsers
+
+
+bdb.env.path         = /opt/i/bdb/
+
+i.uc.dao.SysDao.path = uc
+i.uc.dao.SysDao.name = system
+
+i.uc.dao.UsrDao.path = uc
+i.uc.dao.UsrDao.name = user

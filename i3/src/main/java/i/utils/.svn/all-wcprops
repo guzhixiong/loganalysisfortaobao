@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/repos/!svn/ver/14/i3/src/main/java/i/utils
+END
+Utils.java
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/repos/!svn/ver/14/i3/src/main/java/i/utils/Utils.java
+END
+DbUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/repos/!svn/ver/14/i3/src/main/java/i/utils/DbUtils.java
+END
+IPHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/repos/!svn/ver/14/i3/src/main/java/i/utils/IPHelper.java
+END
+Nick2UID.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/repos/!svn/ver/14/i3/src/main/java/i/utils/Nick2UID.java
+END
+DateUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/repos/!svn/ver/14/i3/src/main/java/i/utils/DateUtils.java
+END

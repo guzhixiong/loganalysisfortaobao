@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/repos/!svn/ver/14/i3/shell
+END
+business.sh
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/repos/!svn/ver/14/i3/shell/business.sh
+END
+path.sh
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/repos/!svn/ver/14/i3/shell/path.sh
+END
+clear_tmp_file.sh
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/repos/!svn/ver/14/i3/shell/clear_tmp_file.sh
+END

@@ -1,0 +1,134 @@
+JVM参数与性能优化
+文章分类:Java编程
+
+在很多地方都会用到 JVM 参数，比如你运行 ant check-style，跑挂了，抛了个 OutOfMemory 错误。这时你上网搜索，他们会告诉你，应该修改 ANT_OPTS 环境变量，加上“-Xmx512m”。
+
+ 
+
+再比如 JBoss 或 tomcat 都有启动脚本(startup.bat等)，里面也用到 JVM 参数。还有 Eclipse 的 eclipse.ini 中也可以加入 JVM 参数。灵活使用这些 JVM 参数可以使我们的 Java 程序获得更好的性能。
+
+
+=== 常用参数 ===
+
+ 
+
+-server
+  一定要作为第一个参数，会使JVM启动速度变慢，但会显著提升JVM性能
+
+ 
+
+-Xms64m
+  设置初始 Heap 大小，使用的最小内存
+
+ 
+
+-Xmx1024m
+  设置最大 Heap 大小
+
+ 
+
+-Xss256k
+  设置每个线程的 Stack 大小
+
+ 
+
+-XX:MaxPermSize=128M
+  设置最大永久区大小，永久保存区用于存放Class信息和元信息
+
+
+=== GC（垃圾回收）参数 ===
+
+ 
+
+Sun HotSpot JVM 通常使用的 GC 算法是分代回收。即把对象按生命周期不同分为年轻代和年老代。新的对象会先生成在Young Area，在几次 GC 以后，如果没有收集到，就会逐渐升级到Tenured Area。
+
+ 
+
+Sun JVM 默认的回收器称为 serial collector ，即串行回收，我们也可以使用多线程并发回收来提高效率。需要注意的是，在单核的机器上，使用默认的回收器可能会更好。
+
+ 
+
+-XX:+UseParNewGC
+  为年轻代对象使用并发回收，会缩短年轻代对象的回收时间
+
+ 
+
+-XX:+UseConcMarkSweepGC
+  为年老代使用并发回收
+
+ 
+
+-XX:+UseParallelGC
+  该收集器和 UseConcMarkSweepGC 是互相排斥的，为新生代使用并行清除，年老代使用单线程Mark-Sweep-Compact的垃圾收集器。
+
+
+=== 其他参数 ===
+
+ 
+
+-XX:CompileThreshold=100
+  该值表示编译之前必须调用方法的次数。HotSpot JVM 使用 JIT(Just-In-Time Compilation, http://en.wikipedia.org/wiki/Just-in-time_compilation) 技术将字节码编译成本地码，默认值为1000，即一个方法被调用了 1000 次之后 JVM 会编译它。降低这个值可能会使程序的性能得到提升，但会使启动速度变慢。
+
+ 
+
+-XX:+DoEscapeAnalysis
+  启用逃逸分析，这个选项只能用于 Java 1.6。原理参见：http://kenwublog.com/jvm-optimization-escape-analysis
+
+
+=== JVM参数的设置 ===
+
+ 
+
+可以直接在java命令后面附加，比如：java -Xmx512m -XX:+UseParNewGC Test
+
+ 
+
+还可以在环境变量中设置，如 JAVA_OPTS 和 ANT_OPTS 。还可以在eclipse.ini中设置，需要写在 -vmargs 一行的后面
+
+
+=== 参考资料 ===
+
+ 
+
+ * Java 6 JVM参数选项大全（中文版）：http://kenwublog.com/docs/java6-jvm-options-chinese-edition.htm
+ * Garbage Collection - Frequently Asked Questions：http://java.sun.com/docs/hotspot/gc1.4.2/faq.html
+ * 调整 JVM 开关以获得最佳性能：http://gceclub.sun.com.cn/NetBeans/tutorials/tuning/index.html
+
+ 
+ 
+ 原创  JDK NEW TOOLS——jps、jinfo、jstat、jmap、jconsole 收藏
+最近压力测试和调优Liferay portal，所以需要找到一种工具，可以比较好的监测VM工具。本来想使用商用工具，但偶然间发现SUN 的JDK中新添了几个工具，并且非常好用。秉承着有免费，不用商用的原则。开始使用新的JDK工具，以下简单介绍一下这几种工具。(注：本文章下的所有工具都存在JDK5.0以上版本的工具集里，同javac一样，不须特意安装)
+
+我一共找到以下五个工具：
+jinfo:可以输出并修改运行时的java 进程的opts。
+jps:与unix上的ps类似，用来显示本地的java进程，可以查看本地运行着几个java程序，并显示他们的进程号。
+jstat:一个极强的监视VM内存工具。可以用来监视VM内存内的各种堆和非堆的大小及其内存使用量。
+jmap:打印出某个java进程（使用pid）内存内的，所有‘对象’的情况（如：产生那些对象，及其数量）。
+jconsole:一个java GUI监视工具，可以以图表化的形式显示各种数据。并可通过远程连接监视远程的服务器VM。
+
+接下来是对这些工具的详细介绍：
+
+从最简单的jstat工具开始：我想很多人都是用过unix系统里的ps命令，这个命令主要是用来显示当前系统的进程情况，有哪些进程，及其id。jps 也是一样，它的作用是显示当前系统的java进程情况，及其id号。我们可以通过它来查看我们到底启动了几个java进程（因为每一个java程序都会独占一个java虚拟机实例），和他们的进程号（为下面几个程序做准备），并可通过opt来查看这些进程的详细启动参数。
+使用方法：在当前命令行下打 jps(需要JAVA_HOME，没有的话，到改程序的目录下打)
+
+接下来是jstat，我之所以这次调优Liferay portal是因为，liferay在默认的情况下，并发用户一多就会产生perm out of momery异常。虽然很开就解决了，但发现对VM内存使用量监控的重要性。通过google，很快的发现了jstat这个工具。
+jstat工具特别强大，有众多的可选项，详细查看堆内各个部分的使用量，以及加载类的数量。使用时，需加上查看进程的进程id，和所选参数。以下详细介绍各个参数的意义。
+jstat -class pid:显示加载class的数量，及所占空间等信息。
+jstat -compiler pid:显示VM实时编译的数量等信息。
+jstat -gc pid:可以显示gc的信息，查看gc的次数，及时间。其中最后五项，分别是young gc的次数，young gc的时间，full gc的次数，full gc的时间，gc的总时间。
+jstat -gccapacity:可以显示，VM内存中三代（young,old,perm）对象的使用和占用大小，如：PGCMN显示的是最小perm的内存使用量，PGCMX显示的是perm的内存最大使用量，PGC是当前新生成的perm内存占用量，PC是但前perm内存占用量。其他的可以根据这个类推， OC是old内纯的占用量。
+jstat -gcnew pid:new对象的信息。
+jstat -gcnewcapacity pid:new对象的信息及其占用量。
+jstat -gcold pid:old对象的信息。
+jstat -gcoldcapacity pid:old对象的信息及其占用量。
+jstat -gcpermcapacity pid: perm对象的信息及其占用量。
+jstat -util pid:统计gc信息统计。
+jstat -printcompilation pid:当前VM执行的信息。
+除了以上一个参数外，还可以同时加上 两个数字，如：jstat -printcompilation 3024 250 6是每250毫秒打印一次，一共打印6次，还可以加上-h3每三行显示一下标题。
+
+jmap 是一个可以输出所有内存中对象的工具，甚至可以将VM 中的heap，以二进制输出成文本。使用方法 jmap -histo pid。如果连用SHELL jmap -histo pid>a.log可以将其保存到文本中去，在一段时间后，使用文本对比工具，可以对比出GC回收了哪些对象。jmap -dump:format=b,file=String 3024可以将3024进程的内存heap输出出来到String文件里。
+
+jinfo:的用处比较简单，就是能输出并修改运行时的java进程的运行参数。用法是jinfo -opt  pid 如：查看2788的MaxPerm大小可以用  jinfo -flag MaxPermSize 2788。
+
+jconsole是一个用java写的GUI程序，用来监控VM，并可监控远程的VM，非常易用，而且功能非常强。由于是GUI程序，这里就不详细介绍了，不会的地方可以参考ＳＵＮ的官方文档。
+使用方法：命令行里打 jconsole，选则进程就可以了。

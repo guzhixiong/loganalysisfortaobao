@@ -1,0 +1,58 @@
+﻿service:jmx:rmi:///jndi/rmi://192.168.1.180:8903/jmxrmi
+service:jmx:rmi:///jndi/rmi://192.168.1.182:8903/jmxrmi
+
+CREATE TABLE   ip (
+  id bigint(20) primary key,
+  start_ip bigint(20) ,
+  end_ip bigint(20) ,
+  nation varchar(50) ,
+  province varchar(100) ,
+  city varchar(100) ,
+  address varchar(200) ,
+  full_address varchar(200) ,
+  isp varchar(200) ,
+  type varchar(50) 
+ )
+ 
+ 
+ 
+ 
+ab -n 100000 -c 20 
+
+-server vs -client
+ 
+server :
++------------------------------+
+| (4949+5015+4776+4965+5035)/5 |
++------------------------------+
+|                    4948.0000 |
++------------------------------+ 
+
+client:
++------------------------------+
+| (4398+4353+4330+4475+4292)/5 |
++------------------------------+
+|                    4369.6000 |
++------------------------------+ 
+
+(server-client)/client:
+
++------------------+
+| (4948-4369)/4369 |
++------------------+
+|           0.1325 |
++------------------+
+
+
+http://192.168.1.190/c?u_id=287592&&u_preurl=http://www.baidu.com&u_title=%E5%A4%8F%E5%AD%A3%E7%83%AD%E5%8D%96%E6%8A%A4%E8%82%A4%E7%B2%BE%E5%8D%8E%E9%9C%B225ml
+http://192.168.2.182:8080/c?u_id=287592&&u_preurl=http://www.baidu.com&u_title=%E5%A4%8F%E5%AD%A3%E7%83%AD%E5%8D%96%E6%8A%A4%E8%82%A4%E7%B2%BE%E5%8D%8E%E9%9C%B225ml
+
+
+speedup<=1/(F+(1-F/N))
+
+u_id 用户id
+u_preurl 前一个页面
+url 访问页面
+ip  ip地址
+agent 浏览器类型
+u_title 页面标题

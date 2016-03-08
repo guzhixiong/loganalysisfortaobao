@@ -1,0 +1,10 @@
+da.file.path = /opt/i/stati
+
+da.db             = mysql
+da.mysql.driver   = com.mysql.jdbc.Driver
+da.mysql.protocol = jdbc:mysql
+da.mysql.options  = useUnicode=true&characterEncoding=utf8
+
+#da.db.url     = jdbc:mysql://host:port/db?options
+
+da.db.insert_values = 5000

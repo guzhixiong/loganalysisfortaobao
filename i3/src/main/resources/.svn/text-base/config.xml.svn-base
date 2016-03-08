@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+
+<configuration>
+	<system />
+	<properties fileName="market_flux.properties" />
+	<properties fileName="da.properties" />
+	<properties fileName="uc.properties" />
+	<properties fileName="bdb-default.properties" />
+</configuration>
